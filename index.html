@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Duotone Atelier</title>
+  <meta name="description" content="Studio duotone gratuit dans le navigateur — ombre, lumière, export PNG. Tout reste local.">
+  <meta name="theme-color" content="#0f1115">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <h1 data-i18n="title">Duotone Atelier</h1>
+    </div>
+    <div class="top-actions">
+      <label class="lang-wrap">
+        <span class="sr-only" data-i18n="langLabel">Langue</span>
+        <select id="lang" aria-label="Langue">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="kab">Taqbaylit</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="panel" id="controls">
+      <section class="block">
+        <h2 data-i18n="sectionLoad">Image</h2>
+        <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Charger une image">
+          <p class="drop-title" data-i18n="dropTitle">Glisse une image ici</p>
+          <p class="drop-hint" data-i18n="dropHint">ou clique pour choisir un fichier</p>
+          <input type="file" id="fileInput" accept="image/*" hidden>
+        </div>
+        <button type="button" id="btnClear" class="btn ghost" disabled data-i18n="clear">Effacer</button>
+      </section>
+
+      <section class="block">
+        <h2 data-i18n="sectionColors">Couleurs</h2>
+        <div class="color-row">
+          <label class="color-field">
+            <span data-i18n="shadow">Ombre</span>
+            <div class="color-controls">
+              <input type="color" id="shadowColor" value="#1a1a2e" aria-label="Couleur ombre">
+              <input type="text" id="shadowHex" class="hex" value="#1A1A2E" maxlength="7" spellcheck="false">
+              <button type="button" id="copyShadow" class="btn icon" title="Copier" data-i18n-title="copyHex">⧉</button>
+            </div>
+          </label>
+          <label class="color-field">
+            <span data-i18n="highlight">Lumière</span>
+            <div class="color-controls">
+              <input type="color" id="highlightColor" value="#e8a87c" aria-label="Couleur lumière">
+              <input type="text" id="highlightHex" class="hex" value="#E8A87C" maxlength="7" spellcheck="false">
+              <button type="button" id="copyHighlight" class="btn icon" title="Copier" data-i18n-title="copyHex">⧉</button>
+            </div>
+          </label>
+        </div>
+        <div class="btn-row">
+          <button type="button" id="btnSwap" class="btn secondary" data-i18n="swap">Échanger</button>
+          <button type="button" id="btnRandom" class="btn secondary" data-i18n="random">Aléatoire</button>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 data-i18n="sectionPresets">Préréglages</h2>
+        <div id="presets" class="presets" role="listbox" aria-label="Préréglages"></div>
+      </section>
+
+      <section class="block">
+        <h2 data-i18n="sectionAdjust">Réglages</h2>
+        <label class="slider-field">
+          <span class="slider-label"><span data-i18n="strength">Force duotone</span><em id="strengthVal">100%</em></span>
+          <input type="range" id="strength" min="0" max="100" value="100">
+        </label>
+        <label class="slider-field">
+          <span class="slider-label"><span data-i18n="brightness">Luminosité</span><em id="brightnessVal">0</em></span>
+          <input type="range" id="brightness" min="-100" max="100" value="0">
+        </label>
+        <label class="slider-field">
+          <span class="slider-label"><span data-i18n="contrast">Contraste</span><em id="contrastVal">0</em></span>
+          <input type="range" id="contrast" min="-100" max="100" value="0">
+        </label>
+      </section>
+
+      <section class="block export-block">
+        <button type="button" id="btnExport" class="btn primary" disabled data-i18n="export">Exporter PNG</button>
+        <p class="privacy" data-i18n="privacy">Tout reste sur ton appareil. Aucun envoi.</p>
+      </section>
+    </aside>
+
+    <main class="stage">
+      <div id="emptyState" class="empty">
+        <div class="empty-icon" aria-hidden="true">◐</div>
+        <p data-i18n="emptyHint">Charge une image pour commencer le duotone. Choisis ombre + lumière, ajuste, exporte.</p>
+      </div>
+      <canvas id="canvas" class="preview" hidden width="800" height="600" aria-label="Aperçu duotone"></canvas>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <span data-i18n="footer">Duotone Atelier · gratuit · MIT</span>
+    <a href="https://github.com/salimadour31-boop/duotone-atelier" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
